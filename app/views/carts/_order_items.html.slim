@@ -1,0 +1,26 @@
+tr
+  td
+    .general-img-wrap-table
+      = link_to(image_tag(url_for(book.cover[:url]), alt: book.cover[:name], class: "cart-img-shadow pull-left"), book_path(book))
+  td
+    p.title
+      = link_to book.title, book_path(book)
+  td
+    span.font-16.in-gold-500
+      = "#{t('currency_sign')}#{book.price}"
+  = form_for order_item, remote: true do |f|
+    td
+      .input-group
+        = link_to "#{order_item_path(id: order_item.id, quantity: order_item.quantity - 1)}", method: :put, remote: true, class: "input-link" do
+          i.fa.fa-minus[style="line-height: 35px;"]
+        = f.text_field :quantity, value: order_item.quantity.to_i, disabled: "disabled", class: "form-control quantity-input", min: 1
+        = f.hidden_field :book_id, value: book.id
+        = link_to "#{order_item_path(id: order_item.id, quantity: order_item.quantity + 1)}", method: :put, remote: true, class: "input-link" do
+          i.fa.fa-plus[style="line-height: 35px;"]
+  td
+    span.font-16.in-gold-500
+      = "#{t('currency_sign')}#{order_item.sub_total}"
+  td
+    = link_to order_item, {data: {confirm: "#{t('cart.confirm')} '#{order_item.book.title}' #{t('cart.confirm_end')}"}, method: :delete, remote: true, class: "close general-cart-close"} do
+      span[aria-hidden="true"]
+        | ×

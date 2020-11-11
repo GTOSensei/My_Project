@@ -1,0 +1,29 @@
+- if current_order.try(:order_items).blank?
+  p.text-center
+    = t('cart.no_items')
+    = link_to t('cart.go_back'), root_path
+    = t('cart.to_cart')
+- elsif current_order.order_items.size >= 1
+  .hidden-xs
+    table.table.table-hover
+      tr.no-hover
+        th.col-pic.pl-0
+          span.in-grey-600
+            = t('headline.book')
+        th.col-title
+        th.col-price
+          span.in-grey-600
+            = t('headline.price')
+        th.col-quantity
+          span.in-grey-600
+            = t('headline.quantity')
+        th.col-total
+          span.in-grey-600
+            = t('headline.subtotal')
+        th.col-close
+      - current_order.order_items.id_asc.each do |order_item|
+        = render 'carts/order_items', book: order_item.book.decorate, order_item: order_item
+  .order_summary
+    = render 'carts/order_summary'
+  .text-center
+    = link_to t('checkout.check'), "#{checkouts_path}", class: "btn btn-default mb-20"

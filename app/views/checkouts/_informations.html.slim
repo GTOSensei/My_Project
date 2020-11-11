@@ -1,0 +1,18 @@
+.col-sm-3
+  h3.general-subtitle class=('mt-0' if !edit)
+    = t('delivery.shipments')
+  p.general-address
+    = order.delivery.name
+    - if edit
+      = link_to t('checkout.edit'), wizard_path(:delivery, edit: 1), class: "general-edit"
+    br/
+    = order.delivery.terms
+.col-sm-3
+  h3.general-subtitle class=("mt-0" if !edit)
+    = t('credit_card.payment_info')
+  p.general-address
+    = mask_card
+    - if edit
+      = link_to t('checkout.edit'), wizard_path(:payment, edit: 1), class: "general-edit"
+    br/
+    = order.credit_card.expiry_date

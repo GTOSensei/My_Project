@@ -1,0 +1,28 @@
+.mb-80
+  h3.in-gold-500.mb-25
+    = "#{t('review.name')} (#{@reviews.count})"
+  - @reviews.each do |review|
+    .general-message-wrap.divider-lg
+      .clearfix
+        - if review.user.avatar.attached?
+          = image_tag review.logo, class: "img-circle logo-size inlide-block pull-left"
+        - else
+          span.img-circle.logo-size.inlide-block.pull-left.logo-empty
+            = review.name[0]
+        .ml-70
+          div
+            .general-message-date.hidden-xs
+              = review.date
+            .max-240
+              .general-message-verified
+                = t('review.verified')
+              .general-message-name
+                = review.name
+          .mb-15
+            - 1.upto(5) do |i|
+              i.fa.fa-star.rate-star class=('rate-empty' if i > review.rating)
+          p
+            b
+              = review.title
+          p
+            = review.comment

@@ -1,0 +1,5 @@
+<% if @result %>
+$(".header").html("<%= escape_javascript(render 'layouts/header') %>")
+<% else %>
+swal("Error", "not valid!", "error");
+<% end %>

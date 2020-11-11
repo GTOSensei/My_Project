@@ -1,0 +1,37 @@
+.hidden-xs.divider-lg.pt-20
+  table.table.table-hover
+    thead
+      tr
+        th
+          span.in-grey-600
+            =t('headline.book')
+        th.col-method
+        th
+          span.in-grey-600
+            =t('headline.price')
+        th
+          span.in-grey-600
+            =t('headline.quantity')
+        th
+          span.in-grey-600
+            =t('headline.total')
+    tbody
+      - order_items.id_asc.each do |order_item|
+        tr
+          td
+            .general-img-wrap-table
+              = link_to(image_tag(url_for(order_item.book.decorate.cover[:url]), alt: order_item.book.decorate.cover[:name], class: "cart-img-shadow pull-left"), book_path(order_item.book.decorate))
+          td
+            p.title
+              =link_to order_item.book.decorate.title, book_path(order_item.book.decorate), class:"font-16 in-gold-500"
+            p.in-grey-600.fw-300
+              =order_item.book.decorate.description[0..230]
+          td
+            span.font-16.in-gold-500
+              ="#{t('currency_sign')}#{order_item.price}"
+          td
+            span.ml-30
+              =order_item.quantity
+          td
+            span.font-16.in-gold-500
+              ="#{t('currency_sign')}#{order_item.sub_total}"

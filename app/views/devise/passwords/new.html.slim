@@ -1,0 +1,16 @@
+main.container.general-main-wrap
+  .text-center
+    h1.mb-30
+      =t('devise.forgot_password')
+    p.general-password-text
+      =t('devise.email_reset')
+  .general-form
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = devise_error_messages!
+      .form-group.mb-25
+        = f.label :email
+        br
+        = f.email_field :email, autofocus: true, autocomplete: "email", placeholder:t('devise.enter_email'), class:"form-control"
+      = f.submit t('devise.email_instructions'), class:"btn btn-default center-block mb-20"
+      .text-center
+        =link_to t('devise.cancel'), url_for(:back), class:"in-gold-500 mb-20"

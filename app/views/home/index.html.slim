@@ -1,0 +1,62 @@
+main.container
+  #slider.carousel.slide[data-ride="carousel"]
+    ol.carousel-indicators
+      li.active[data-target="#slider" data-slide-to="0"]
+      li[data-target="#slider" data-slide-to="1"]
+      li[data-target="#slider" data-slide-to="2"]
+    .carousel-inner[role="listbox"]
+      - @lattest_books.each_with_index do |book, index|
+        .item class=('active' if index==0)
+          .row
+            .col-sm-5
+              .general-img-wrap
+                = image_tag book.cover[:url], alt: book.cover[:name], class: "img-shadow general-thumbnail-img"
+            .col-sm-7
+              .mb-60
+                h1
+                  = book.title
+                p.lead
+                  = book.description
+                p.lead.small
+                  = book.authors
+                .general-align
+                  = link_to t('button.buy_now'), order_items_path(book_id: book.id, quantity: 1), method: :post, class: "btn btn-primary", remote: true
+    a.left.carousel-control[href="#slider" role="button" data-slide="prev"]
+      span.icon-prev[aria-hidden="true"]
+      span.sr-only
+        = t('home.previous')
+    a.right.carousel-control[href="#slider" role="button" data-slide="next"]
+      span.icon-next[aria-hidden="true"]
+      span.sr-only
+        = t('home.next')
+.container
+  .jumbotron.text-center.mb-0
+    h2.h1
+      = t('home.welcome')
+    .mb-res-50
+      p
+        = t('home.info')
+    = link_to t('button.started'), books_path, class: 'btn btn-default'
+  .mb-35
+    h3
+      = t('home.best_sellers')
+    .row
+      - @best_sellers.each do |book|
+        .col-sm-6.col-md-3
+          .general-thumb-wrap
+            .thumbnail.general-thumbnail
+              = image_tag book.cover[:url], alt: book.cover[:name], class: "img-shadow general-thumbnail-img"
+              .thumb-hover
+                .general-thumb-link-wrap
+                  = link_to book_path(book), class: 'thumb-hover-link' do
+                    i.fa.fa-eye.thumb-icon[aria-hidden="true" style="line-height: 35px;"]
+                  = render 'layouts/add_to_cart', book: book
+          .mb-35
+            .clearfix
+              p.pull-right.font-16.in-gold-500
+                = "#{t('currency_sign')}#{book.price}"
+              p.title.mr-55
+                = book.title
+            span.divider-sm
+            p.lead.small
+              = book.authors

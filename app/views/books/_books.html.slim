@@ -1,0 +1,20 @@
+- @books.in_groups_of(4, false) do |books_group|
+  .row.mb-25
+    - books_group.each do |book|
+      .col-xs-6.col-sm-3
+        .general-thumb-wrap
+          .thumbnail.general-thumbnail
+            = image_tag book.cover[:url], alt: book.cover[:name], class: "img-shadow general-thumbnail-img"
+            .thumb-hover
+              .general-thumb-link-wrap
+                = link_to book_path(book), class: "thumb-hover-link" do
+                  i.fa.fa-eye.thumb-icon[aria-hidden="true" style="line-height: 35px;"]
+                = render 'layouts/add_to_cart', book: book
+        .general-thumb-info
+          p.title
+            = book.title
+          p.font-16.in-gold-500
+            = "#{t('currency_sign')}#{book.price}"
+          span.divider-sm
+          p.lead.small
+            = book.authors

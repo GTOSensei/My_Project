@@ -1,0 +1,32 @@
+p.in-gold-500.font-18
+  =t('summary.order_summary')
+table class=(class_table)
+  tr
+    td
+      p.font-16
+        =t('summary.subtotal')
+    td
+      p.font-16
+        ="#{t('currency_sign')}#{order.subtotal}"
+  tr
+    td
+      p.font-16
+        =t('summary.coupon')
+    td
+      p.font-16
+        ="#{t('currency_sign')}#{order.discount}"
+  - if order.delivery_id.present?
+    tr
+      td
+        p.font-16
+          =t('summary.delivery')
+      td
+        p.font-16
+          ="#{t('currency_sign')}#{order.delivery_price}"
+  tr
+    td
+      strong.font-18
+        =t('summary.order_total')
+    td
+      strong.font-18
+        ="#{t('currency_sign')}#{order.order_total}"

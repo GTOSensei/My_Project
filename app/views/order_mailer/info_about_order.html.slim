@@ -1,0 +1,10 @@
+h3
+  = t('info.welcome_mailer')
+p
+  = "#{t('info.order_number')} #{@order.order_number}, #{t('info.worth')} #{@order.total_price}"
+  br
+  = "#{t('info.delivery')} #{@order.delivery.name}"
+  br
+  = "#{t('info.delivery_time')} #{@order.delivery.terms}"
+p
+  = t('info.thanks_mailer')

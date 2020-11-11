@@ -1,0 +1,14 @@
+= hidden_field_tag :type, address_type
+- t('address_columns').each do |key, value|
+  = f.fields_for address_type, address do |address_form|
+    .form-group class=('has-error' if error_address?(key, address))
+      - if key == :country
+        = value[:name]
+        |  * 
+        = address_form.select :country_id, AddressDecorator.countries, {}, {class: 'form-control'}
+      - else
+        = value[:name]
+        |  * 
+        = address_form.text_field key, id: key, type: "text", placeholder: value[:placeholder], class: "form-control"
+      span.help-block
+        = "#{error_key(key, address)}"

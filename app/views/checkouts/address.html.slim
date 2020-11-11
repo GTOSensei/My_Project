@@ -1,0 +1,30 @@
+main.container
+  = render "checkouts/steps_checkout"
+  = form_for @order, url: wizard_path, html: {class: "res-mb-100", method: :put} do |form_address|
+    .hidden-xs.hidden-sm
+      .row
+        .col-md-5
+          h3.general-subtitle
+            = t('address.billing_address')
+          p.general-info-text
+            = t('check_address.all_fields')
+        .col-md-5.col-md-offset-1
+          h3.general-subtitle
+            = t('address.shipping_address')
+    .row
+      .col-md-5.mb-40
+        = render "addresses/form_fields", f: form_address, address: order_billing, address_type: AddressConst::BILLING
+      .col-md-5.col-md-offset-1.mb-60
+        #shipping.hidden-xs.hidden-sm style=('display: none;' if @order.use_billing)
+          = render "addresses/form_fields", f: form_address, address: order_shipping, address_type: AddressConst::SHIPPING
+        .form-group.checkbox
+          label.checkbox-label
+            = form_address.check_box :use_billing, checked: @order.use_billing, hidden: true, id: 'showHideshipping', class: 'checkbox-input billing-flag'
+            span.checkbox-icon
+              i.fa.fa-check
+            span.checkbox-text
+              = t('check_address.use_billing')
+    .general-text-align.mb-60
+      = render "checkouts/summary", order: @order, class_table: "general-summary-table"
+      .text-center
+        = form_address.submit "#{t('button.save_continue')}", class: "btn btn-default mb-20"

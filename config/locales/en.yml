@@ -1,0 +1,246 @@
+en:
+  currency_sign: '€'
+
+  button:
+    save: 'Save'
+    save_continue: 'Save and Continue'
+    back: 'Back to Store'
+    place_order: 'Place Order'
+    started: 'Get Started'
+    view_more: 'View More'
+    home: 'Home'
+    shop: 'Shop'
+    orders: 'Orders'
+    settings: 'Settings'
+    admin_panel: 'Admin Panel'
+    my_account: 'My account'
+    my_orders: 'My Orders'
+    log_out: 'Log out'
+    log_in: 'Log In'
+    sing_up: 'Sing Up'
+    buy_now: 'Buy Now'
+    add_to_cart: 'Add to Cart'
+
+  info:
+    thank_you: 'Thank You for your Order!'
+    order_sent_to: 'An order confirmation has been has been sent to'
+    order: 'Order'
+    mail_welcome: 'Welcome to Amazing Bookstore!'
+    mail_thanks: 'Thank You for your Order!'
+    sort: 'Sort by'
+    filter: 'Filter:'
+    all: 'All'
+    bookstore: 'Bookstore'
+    thanks_mailer: 'Thanks for joining and have a great day!'
+    welcome_mailer: "Welcome to 'Amazing' Bookstore"
+    successfully_mail: 'You have successfully signed up to Amazing,'
+    username: 'your username is:'
+    password: 'your password is:'
+    order_number: 'Your order number:'
+    worth: 'worth'
+    delivery: 'Delivery:'
+    delivery_time: 'Estimated delivery time:'
+
+  book:
+    catalog: 'Сatalog'
+    back: 'Back to results'
+    description: 'Description'
+    publication: 'Year of publication'
+    dimensions: 'Dimensions'
+    materials: 'Materials'
+    previous: 'Previous'
+    next: 'Next'
+    best_sellers: 'Best Sellers'
+
+  home:
+    welcome: 'Welcome to our amazing Bookstore!'
+    info: 'We pore through hundreds of new books each month and select the five best we can find to share with our members.'
+
+  user:
+    email_busy: 'This Email belongs to another user'
+    send_email: 'You have been successfully registered. You have been sent a letter to: '
+
+  review:
+    name: 'Reviews'
+    review: 'Review'
+    title: 'Title'
+    msg: 'Thanks for Review. It will be published as soon as it will be verifed'
+    verified: 'Verified Reviewer'
+    rating_error: 'Please rate the book'
+    score: 'Score'
+    write: 'Write a Review'
+  
+  address:
+    billing_address: 'Billing Address'
+    shipping_address: 'Shipping Address'  
+    success: 'Your address has been successfully updated!'
+    billing_error: 'Billing Address Errors: '
+    shipping_error: 'Shipping Address Errors: '
+    phone: 'Phone'
+
+  summary:
+    order_summary: 'Order Summary'
+    subtotal: 'Subtotal:'
+    order_total: 'Order Total:'
+    coupon: 'Coupon:'
+    delivery: 'Delivery:'
+    
+  checkout:
+    check: 'Checkout'
+    login: 'Login'
+    address: 'Address'
+    delivery: 'Delivery'
+    payment: 'Payment'
+    confirm: 'Confirm'
+    complete: 'Complete'
+    edit: ' edit'
+
+  check_login:    
+    returning_customer: 'Returning Customer'
+    log_in_with_password: 'Log In with Password'
+    enter_email: 'Enter Email'
+    password: 'Password'
+    forgot_password: 'Forgot password?'
+    new_customer: 'New Customer'
+    or: 'or'
+    quik_register: 'Quik Register'
+    continue_to_checkout: 'Continue to Checkout'
+    create_password_later: 'You’ll be able to create password later'
+
+  check_address:
+    all_fields: 'all fields are required'
+    use_billing: 'Use Billing Adress'
+
+  delivery:
+    name: 'Delivery'
+    method: 'Method'
+    days: 'Days'
+    price: 'Price'
+    error: 'Choose shipping method!'
+    shipments: 'Shipments'
+
+  confirm:
+    error: 'Order processing error. Сontact the store manager!'  
+
+  credit_card:
+    name: 'Credit Card'
+    number: 'Card Number'
+    name_card: 'Name on Card'
+    mm_yy: 'MM / YY'
+    cvv: 'CVV'
+    payment_info: 'Payment Information'
+    number_error: 'Сard number must be from 13-19 digits'
+  
+  headline:
+    book: 'Book'
+    price: 'Price'  
+    quantity: 'Quantity'
+    subtotal: 'SubTotal'
+    total: 'Total'
+
+  cart:
+    no_items: 'There are no items in your shopping cart. Please '
+    go_back: 'go back'
+    to_cart: ' and add some items to your cart.' 
+    name: 'Cart'
+    confirm: 'Are you sure you wish to delete the book '
+    confirm_end: 'from your cart?'
+    code: 'Enter Your Coupon Code'
+    apply_coupon: 'Apply Coupon'
+
+  order:
+    my_orders: 'My Orders'
+    number: 'Number'
+    completed: 'Completed at'
+    status: 'Status'
+    total: 'Total'
+
+  sort:  
+    in_queue: 'Waiting for processing'
+    in_delivery: 'In delivery'
+    delivered: 'Delivered'
+    canceled: 'Canceled'
+    all: 'All'
+
+  errors:
+    code: 'Valid characters are A-Z0-9-'
+    discount: 'Enter an integer'
+    delivery: 'Valid characters are a-zA-Z-'
+    terms: 'Valid characters are a-zA-Z0-9-'
+    price: 'Valid format 0,00'
+    phone: 'Invalid country phone code. Your code: '
+    file_size: 'Images should be less than '
+    file_content: 'Images only allows jpeg and png'
+    phone_code: 'Invalid code format'
+    expiry_date: 'Expected format is MM/YY'
+    nil_book: 'Requested book not found'
+
+  filter_book:
+    newest: 'Newest first'
+    popular: 'Popular first'
+    price_low_to_high: 'Price: low to high'
+    price_high_to_low: 'Price: high to low'
+    title_asc: 'Title: A - Z'
+    title_desc: 'Title: Z - A'
+
+  address_columns:    
+    firstname: 
+      name: 'First Name'
+      placeholder: 'First Name'
+    lastname: 
+      name: 'Last Name'
+      placeholder: 'Last Name'
+    address:
+      name: 'Address'
+      placeholder: 'Address'
+    city:
+      name: 'City'
+      placeholder: 'City'
+    zip:
+      name: 'Zip'
+      placeholder: 'Zip'
+    country:
+      name: 'Country'
+      placeholder: 'Country'
+    phone:
+      name: 'Phone'
+      placeholder: 'Example +380975559977'
+
+  admin:
+    all: 'All'
+    author: 'Author'
+    images: 'Images'
+    title: 'Title'
+    authors: 'Authors'
+    categories: 'Categories'
+    delete_all_img: 'Delete all images'
+    dimensions: 'Dimensions'
+    delete_img: 'Delete image'
+    cover_not: 'Cover not available'
+    info_book: 'Info Book'
+    in_progress: 'In progress'
+    delivered: 'Delivered'
+    canceled: 'Canceled'
+    order_number: 'Order number'
+    completion: 'Date of completion'
+    status_change: 'Status change'
+    current_status: 'Current status: '
+    info_status: 'Order status can be changed only when the status is in_queue and above'
+    new: 'New'
+    processed: 'Processed'
+    approved: 'Approved'
+    rejected: 'Rejected'
+    back_review: 'Back to reviews'
+    title_review: 'Rewiew Title'
+    del_avatar: 'Delete avatar'
+    avatar: 'Avatar'
+    user_photo: 'User Photo'
+    unauthorized: 'Unauthorized Access!'
+    order_item: 'Order Items Details'
+
+
+
+
+   
+  
+

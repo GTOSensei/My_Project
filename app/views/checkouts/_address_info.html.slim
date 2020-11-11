@@ -1,0 +1,12 @@
+p.general-address
+  = "#{address.firstname} #{address.lastname}"
+  - if edit
+    = link_to t('checkout.edit'), wizard_path(:address, edit: 1), class: "general-edit"
+  br
+  = address.address
+  br
+  = "#{address.city} #{address.zip}"
+  br
+  = address.country.name
+  br
+  = "#{t('address.phone')} #{address.phone}"

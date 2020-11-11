@@ -1,0 +1,23 @@
+ul.steps.list-inline
+  - wizard_steps.each_with_index do |value, index|
+    - next if index == 0
+    - if value == step
+      li.step.active
+        span.step-number
+          = index
+        span.step-text.hiddene-xs
+          = t("checkout.#{value}")
+    - elsif index < wizard_steps.index(step)
+      li.step.done
+        span.step-number
+          i.fa.fa-check.step-icon
+        span.step-text.hiddene-xs
+          = t("checkout.#{value}")
+    - else
+      li.step
+        span.step-number
+          = index
+        span.step-text.hiddene-xs
+          = t("checkout.#{value}")
+    - if index < wizard_steps.length - 1
+      li.step-divider

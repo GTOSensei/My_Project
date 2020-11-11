@@ -1,0 +1,5 @@
+= form_for(@user, url: registration_path(@user), html: { method: :put }) do |f|
+  = render "addresses/form_fields", f: f, address_type: address_type, address: @user.send(address_type.to_sym)
+  .form-group.mb-55
+  .text-center.general-text-align
+    = f.submit t('button.save'), class:"btn btn-default mb-35"

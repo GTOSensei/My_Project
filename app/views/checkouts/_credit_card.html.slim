@@ -1,0 +1,22 @@
+= f.fields_for :credit_card, @order.credit_card do |card_form|
+  .form-group class=('has-error' if errors_card?(:number))
+    = t('credit_card.number')
+    = card_form.text_field :number, value: mask_card, pattern: "^[0-9]{13,19}$", placeholder: t('credit_card.number'), class: "form-control", title: t('credit_card.number_error'), required: true
+    span.help-block= error(:number)
+  .row
+    .col-sm-6
+      .form-group class=('has-error' if errors_card?(:card_owner))
+        = t('credit_card.name_card')
+        = card_form.text_field :card_owner, type: "text", placeholder: t('credit_card.name_card'), class: "form-control", required: true
+        span.help-block= error(:card_owner)
+    .col-sm-3
+      .form-group class=('has-error' if errors_card?(:expiry_date))
+        = t('credit_card.mm_yy')
+        = card_form.text_field :expiry_date, type: "text", placeholder: t('credit_card.mm_yy'), class: "form-control", required: true
+        span.help-block= error(:expiry_date)
+    .col-sm-3
+      .form-group.relative
+        = t('credit_card.cvv')
+        = number_field_tag 'cvv', "", pattern: "^[0-9]{3,4}$", type: 'password', placeholder: t('credit_card.cvv'), class: "form-control", required: true
+        span.help-block
+        i.fa.fa-question-circle.general-form-help

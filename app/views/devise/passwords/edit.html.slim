@@ -1,0 +1,23 @@
+main.container.general-main-wrap
+  .text-center
+    h3.general-login-title
+      =t('devise.set_password')
+  .general-form
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      = devise_error_messages!
+      = f.hidden_field :reset_password_token
+      .form-group.mb-30
+        = f.label :password, t('devise.label_password'), class:"control-label input-label"
+        br
+        - if @minimum_password_length
+          em
+            | (
+            = @minimum_password_length
+            |  characters minimum)
+          br
+        = f.password_field :password, autofocus: true, autocomplete: "new-password", placeholder:t('devise.label_password'), class:"form-control"
+      .form-group.mb-40
+        = f.label :password_confirmation, t('devise.confirm_password'), class:"control-label input-label"
+        br
+        = f.password_field :password_confirmation, autocomplete: "off", placeholder:t('devise.confirm_password'), class:"form-control"
+      = f.submit t('devise.change'), class:"btn btn-default center-block mb-20"

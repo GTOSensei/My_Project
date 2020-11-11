@@ -1,0 +1,12 @@
+.general-order-wrap
+  .row
+    .col-sm-4
+      .input-group.general-input-group
+        = form_with url: cart_path, method: :put do |f|
+          = f.label :code, t('cart.code'), class: "input-label"
+          = f.text_field :code, class: "form-control mb-30", pattern: "^[0-9a-zA-Z]+$", required: true
+          div
+            = f.submit t('cart.apply_coupon'), class: "btn btn-primary mr-5 mb-15"
+    .col-sm-8
+      .res-mr-200.text-center.general-text-right
+        = render "checkouts/summary", order: current_order, class_table: "general-summary-table general-summary-table-right general-text-right"

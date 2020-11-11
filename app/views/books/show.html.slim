@@ -1,0 +1,67 @@
+main.container
+  = link_to url_for(:back), class: "general-back-link" do
+    i.fa.fa-long-arrow-left.mr-15
+    = t('book.back')
+  .row
+    .col-sm-6
+      .product-gallery
+        .mb-20
+          = image_tag @book.cover[:url], alt: @book.cover[:name], class: "img-responsive"
+        .images.clearfix
+          - if @book.images.count > 1
+            - @book.images.each_with_index do |image, index|
+              - if index >= 1 && index <= 3
+                = link_to url_for(image), class: "img-link" do
+                  = image_tag image.variant(resize: '100x150!')
+    .col-sm-6
+      h1.mt-res-0
+        = @book.title
+      p.lead.small
+        = @book.authors
+      .row
+        .col-xs-12.col-md-4
+          p.h1.in-gold-500.mt-10
+            = "#{t('currency_sign')}#{@book.price}"
+        = form_with url: order_items_path, method: :post, remote: true do |f|
+          .col-xs-5.col-md-3
+            .input-group.general-position
+              a.input-link.quantity-minus[href="#"]
+                i.fa.fa-minus[style="line-height: 35px;"]
+              = f.text_field :quantity, value: 1, class: "form-control quantity-input", pattern: "^[1-9]{1}[0-9]{0,3}$", min: 1, required: true
+              a.input-link.quantity-plus[href="#"]
+                i.fa.fa-plus[style="line-height: 35px;"]
+          = f.hidden_field :book_id, value: @book.id
+          .col-xs-7.col-md-5
+            = f.submit t('button.add_to_cart'), class: "btn btn-default pull-right general-position"
+      .general-info-wrap.divider-lg
+        p
+          = t('description')
+        div
+          input#post-1.read-more-state[type="checkbox"]
+          p.read-more-wrap[style="color:rgb(148, 143, 143);"]
+            = @book.description.slice(0..456)
+            span.read-more-target[style="color:rgb(148, 143, 143);"]
+              = @book.description.slice(457..-1)
+          - if @book.description.length > 456
+            label.read-more-trigger[for="post-1"]
+      .general-info-wrap.divider-lg
+        .clearfix
+          p.pull-left
+            = t('book.publication')
+          p.lead.small.pull-right
+            = @book.published_at
+      .general-info-wrap.divider-lg
+        .clearfix
+          p.pull-left
+            = t('book.dimensions')
+          p.lead.small.pull-right
+            = @book.properties
+      .general-info-wrap.divider-lg
+        .clearfix
+          p.pull-left
+            = t('book.materials')
+          p.lead.small.pull-right
+            = @book.materials
+  - if can? :create, Review
+    = render "reviews/form"
+  = render "reviews/show"

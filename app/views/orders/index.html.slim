@@ -1,0 +1,46 @@
+main.container.general-main-wrap
+  h1.mt-0.mb-25
+    = t('order.my_orders')
+  .dropdowns.pull-right
+    .dropdown.width-240
+      p.lead.small.mb-10
+        = t('info.filter')
+      .dropdowns.dropdown.general-order-dropdown
+        a.dropdown-toggle.lead.small[href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"]
+          = order_sort_by
+          i.fa.fa-angle-down.dropdown-icon.pull-right
+        ul.dropdown-menu
+          - t('sort').each do |key, value|
+            li
+              = link_to value, orders_path(filter: key)
+  .hidden-xs.mb-res-50
+    table.table.table-hover
+      thead
+        tr
+          th
+            span.in-grey-600
+              = t('order.number')
+          th
+            span.in-grey-600
+              = t('order.completed')
+          th
+            span.in-grey-600
+              = t('order.status')
+          th
+            span.in-grey-600
+              = t('order.total')
+      tbody
+        - @orders.each do |order|
+          tr
+            td
+              span
+                = link_to order.order_number, order_path(order), class: 'general-order-number'
+            td
+              span.in-grey-900.font-16.fw-300
+                = order.completed
+            td
+              span.font-16.in-grey-900.fw-300
+                = status(order.status)
+            td
+              strong.font-16.in-gold-500
+                = "#{t('currency_sign')}#{order.order_total}"

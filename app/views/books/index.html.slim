@@ -1,0 +1,33 @@
+main.container
+  h1.general-title-margin
+    = t('book.catalog')
+  .hidden-xs.clearfix
+    .dropdowns.pull-right
+      .dropdown.width-240
+        p.lead.small.mb-10
+          = t('info.sort')
+        .dropdown
+          a.dropdown-toggle.lead.small[href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"]
+            = @services.sort_by
+            i.fa.fa-angle-down.dropdown-icon.pull-right
+          ul.dropdown-menu
+            - t('filter_book').each do |filter, name|
+              li
+                = link_to name, books_path(category: params[:category], sort: filter)
+    ul.list-inline.pt-10.mb-25.mr-240
+      li.mr-35
+        = link_to books_path, class: "filter-link" do
+          = t('info.all')
+          span.badge.general-badge
+            = Book.count
+      - Category.all.each do |category|
+        li.mr-35
+          = link_to books_path(category: category.title), class: "filter-link" do
+            = category.title
+            span.badge.general-badge
+              = category.books.count
+  .mb-120
+    #books_repository
+      = render 'books', books: @books
+    .text-center
+      = link_to_next_page @books, t('button.view_more'), remote: true, class: "btn btn-primary"

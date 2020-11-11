@@ -1,0 +1,48 @@
+header.navbar.navbar-default
+  .container
+    .navbar-header
+      button.navbar-toggle.pull-left[type="button" data-toggle="collapse" data-target="#navbar"]
+        span.sr-only
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand
+        = t('info.bookstore')
+    = link_to "#{cart_path}", class: "shop-link pull-right hidden-xs" do
+      span.shop-icon
+        span.shop-quantity
+          = order_total_count
+    #navbar.navbar-collapse.collapse.pl-30[aria-expanded="false"]
+      .hidden-xs
+        ul.nav.navbar-nav
+          li
+            - if can? :read, ActiveAdmin::Page
+              = link_to t('button.admin_panel'), "#{admin_root_path}"
+          li
+            = link_to t('button.home'), "#{root_path}"
+          li.dropdown
+            a.dropdown-toggle[href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"]
+              = t('button.shop')
+            ul.dropdown-menu
+              - Category.all.each do |category|
+                li
+                  = link_to "#{category.title}", "#{books_path(category: category.title)}"
+          - if user_signed_in?
+            li
+
+            li.dropdown
+              a.dropdown-toggle[href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"]
+                = t('button.my_account')
+              ul.dropdown-menu
+                li
+                  = link_to t('button.settings'), "#{edit_user_registration_path}"
+                li
+                  = link_to t('button.my_orders'), "#{orders_path}"
+                li.divider[role="separator"]
+                li
+                  = link_to t('button.log_out'), destroy_user_session_path, method: :delete
+          - else
+            li
+              = link_to t('button.log_in'), "#{new_user_session_path}"
+            li
+              = link_to t('button.sing_up'), "#{new_user_registration_path}"

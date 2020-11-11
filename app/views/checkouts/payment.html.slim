@@ -1,0 +1,11 @@
+main.container.mb-res-50
+  = render "checkouts/steps_checkout"
+  h3.general-subtitle
+    =t('credit_card.name')
+  = form_for @order, url: wizard_path, method: :put do |form_order|
+    .max-600.mb-80
+      = render 'checkouts/credit_card', f:form_order
+    .general-text-align.mb-60
+      = render "checkouts/summary", order: @order, class_table: "general-summary-table"
+    .text-center
+      = form_order.submit "#{t('button.save_continue')}", class:"btn btn-default mb-20"

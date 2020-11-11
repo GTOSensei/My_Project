@@ -1,0 +1,20 @@
+main.container.general-main-wrap
+  = render "checkouts/steps_checkout"
+  .text-center.mb-40
+    h3.general-subtitle
+      =t('info.thank_you')
+    p.fw-300
+      ="#{t('info.order_sent_to')} #{@user.email}"
+  .row.mb-20
+    .col-sm-6
+      = render "checkouts/address_info", address: @order.shipping_address, edit:false
+    .col-sm-6.hidden-xs.text-right
+      p.general-order-number.mb-0
+        ="#{t('info.order')} ##{@order.order_number}"
+      p.general-address.mb-30
+        =@order.created_at.strftime('%B %d, %Y')
+  = render "checkouts/confirm_order_items", order_items: @order.order_items
+  .text-center.general-text-right
+    = render "checkouts/summary", order: @order, class_table: "general-summary-table general-summary-table-right general-text-right"
+  .text-center
+    = link_to t('button.back'), books_path, class: 'btn btn-default mb-20'

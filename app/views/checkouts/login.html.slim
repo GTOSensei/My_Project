@@ -1,0 +1,42 @@
+main.container
+  .row
+    .col-md-5.mb-40
+      .text-center
+        h3.general-subtitle
+          =t('check_login.returning_customer')
+        =link_to user_facebook_omniauth_authorize_path, class: "general-login-icon" do
+          i.fa.fa-facebook-official
+        p.general-login-text
+          =t('check_login.or')
+      .general-form
+        = form_for(User.new, url: user_session_path) do |f|
+          .mb-40
+            p.mb-15
+              =t('check_login.log_in_with_password')
+            .form-group.mb-30
+              = f.label :email, "#{t('check_login.enter_email')}", class:"control-label input-label"
+              = f.email_field :email, placeholder:"#{t('check_login.enter_email')}", class:"form-control",  autofocus: true, autocomplete: "email"
+            .form-group.mb-30
+              = f.label :password, "#{t('check_login.password')}", class:"control-label input-label"
+              = f.password_field :password, placeholder:"#{t('check_login.password')}", class:"form-control", autocomplete: "current-password"
+              =link_to t('check_login.forgot_password'), new_user_password_path, class: "help-block in-gold-500"
+          = f.submit "#{t('check_login.log_in_with_password')}", class:"btn btn-default mb-20"
+    .col-md-5.col-md-offset-1.mb-60
+      .text-center
+        h3.general-subtitle
+          =t('check_login.new_customer')
+        =link_to user_facebook_omniauth_authorize_path, class: "general-login-icon" do
+          i.fa.fa-facebook-official
+        p.general-login-text
+          =t('check_login.or')
+      .general-form
+        = form_for(User.new, url: user_registration_path) do |f|
+          .mb-40
+            p.mb-5
+              =t('check_login.quik_register')
+            p.general-info-text.font-12.mb-20
+              =t('check_login.create_password_later')
+            .form-group.mb-30
+              = f.label :email, "#{t('check_login.enter_email')}", class:"control-label input-label"
+              = f.email_field :email, placeholder:"#{t('check_login.enter_email')}", class:"form-control",  autofocus: true, autocomplete: "email"
+          = f.submit "#{t('check_login.continue_to_checkout')}", class:"btn btn-default mb-20"

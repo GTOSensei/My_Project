@@ -1,0 +1,26 @@
+= form_for(:review, url: book_reviews_url(@book), html: {method: :post, action: :create}) do |f|
+  = f.hidden_field :user_id, value: current_user.id
+  = f.hidden_field :book_id, value: @book.id
+  .mb-80
+    h3
+      = t('review.write')
+    p.general-info-text
+      = t('review.score')
+    .mb-15
+      #txt.err
+        = t('review.rating_error')
+      .star-rating__wrap
+        = f.collection_radio_buttons :rating, (1..5).reverse_each.map{|k| [k.to_s, k]}, :first, :last do |b|
+          = b.radio_button(class: "star-rating__input", required: true)
+          = b.label(class: "star-rating__ico fa fa-star rate-empty", title: b.text) {""}
+    .row
+      .col-md-8
+        .mb-40
+          .form-group class=('has-error' if ReviewDecorator.errors(@review, 'title'))
+            = f.label :title, t('review.title'), for: "title", class: "control-label input-label in-grey-600"
+            = f.text_field :title, autofocus: true, autocomplete: "title", type: "text", class: "form-control"
+          .form-group class=('has-error' if ReviewDecorator.errors(@review, 'comment'))
+            = f.label :comment, t('review.review'), for: "comment", class: "control-label input-label in-grey-600"
+            = f.text_area :comment, autofocus: true, autocomplete: "comment", type: "text", class: "form-control"
+          .text-right
+            = f.submit t('review.review'), class: 'btn btn-default mb-20', onClick: 'radio_btn()'

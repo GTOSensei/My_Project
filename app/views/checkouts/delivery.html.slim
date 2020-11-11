@@ -1,0 +1,39 @@
+main.container.general-main-wrap
+  = render "checkouts/steps_checkout"
+  = form_for @order, url: wizard_path, html: { class: "res-mb-100", method: :put } do |form_order|
+    h3.general-subtitle
+      =t('delivery.name')
+    .hidden-xs.mb-res-50
+      table.table.table-hover
+        thead
+          tr
+            th.col-method
+              span.in-grey-600.ml-40
+                =t('delivery.method')
+            th
+              span.in-grey-600
+                =t('delivery.days')
+            th
+              span.in-grey-600
+                =t('delivery.price')
+        tbody
+          - Delivery.all.each do |delivery|
+            tr
+              td
+                .form-group.radio.mt-0.mb-0
+                  label.radio-label
+                    = form_order.radio_button :delivery_id, delivery.id, class:"radio-input", hidden:"true"
+                    span.radio-icon
+                    span.radio-text
+                      = delivery.name
+              td
+                span
+                  = delivery.terms
+              td
+                span.font-16.in-gold-500
+                  = "#{t('currency_sign')}#{delivery.price}"
+    = form_order.hidden_field :order_id, value: @order.id
+    .general-text-align.mb-60
+      = render "checkouts/summary", order: @order, class_table: "general-summary-table"
+    .text-center
+      = form_order.submit "#{t('button.save_continue')}", class:"btn btn-default mb-20"

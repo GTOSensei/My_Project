@@ -1,0 +1,11 @@
+h3
+  = "#{t('info.welcome_mailer')}, #{@user.email}"
+p
+  = t('info.successfully_mail')
+  br
+  = "#{t('info.username')} #{@user.email}"
+  br
+  = "#{t('info.password')} #{@user.password}"
+  br
+p
+  = t('info.thanks_mailer')

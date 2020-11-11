@@ -1,0 +1,85 @@
+main.container
+  h1.general-title-margin
+    =t('devise.settings')
+  ul.nav.clearfix.mb-20[role="tablist"]
+    li.tab-item.active[role="presentation"]
+      a.tab-link[href="#address" aria-controls="address" role="tab" data-toggle="tab"]
+        =t('devise.address')
+    li.tab-item[role="presentation"]
+      a.tab-link[href="#privacy" aria-controls="privacy" role="tab" data-toggle="tab"]
+        =t('devise.privacy')
+  .tab-content
+    = devise_error_messages!
+    #address.tab-pane.fade.in.active.general-main-wrap[role="tabpanel"]
+      div
+        .row
+          .col-md-5.mb-40
+            .hidden-xs.hidden-sm
+              h3.general-subtitle.mt-0
+                =t('address.billing_address')
+            = render "addresses/form", address_type: AddressConst::BILLING
+          .col-md-5.col-md-offset-1.mb-25
+            .hidden-xs.hidden-sm
+              h3.general-subtitle.mt-0
+                =t('address.shipping_address')
+            = render "addresses/form", address_type: AddressConst::SHIPPING
+    #privacy.tab-pane.fade[role="tabpanel"]
+      .row.mb-60
+        .col-sm-5
+          p.in-gold-500.font-18.mb-25
+            =t('devise.email')
+          .general-form-md
+            = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+              .form-group.mb-35
+                = f.label :email, t('devise.email_enter'), for:"email", class:"control-label input-label"
+                br
+                = f.email_field :email, autofocus: true, autocomplete: "email", type:"email", placeholder:t('devise.enter_email'), class:"form-control", required:true
+              .form-group.mb-35
+                = f.label :avatar, t('devise.avatar'), for:"avatar", class:"control-label input-label"
+                br
+                .form-group.mb-35
+                  - if current_user.avatar.attached?
+                    = image_tag current_user.avatar.variant(resize: '100x100!'),class:"img-polaroid"
+                  =f.file_field :avatar, accept: 'image/jpeg,image/png'
+              - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+                div
+                  ="#{t('devise.currently_confirmation')} #{resource.unconfirmed_email}"
+              .general-text-align
+                = f.submit t('button.save'), class:"btn btn-default mb-35"
+        - if current_user.provider.blank?
+          .col-sm-5.col-sm-offset-1
+            p.in-gold-500.font-18.mb-25
+              =t('devise.password')
+            .general-form-md.divider-lg-bottom.pb-25
+              = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+                .form-group.mb-30
+                  = f.label :current_password, t('devise.old_password'), for:"oldPassword", class:"control-label input-label"
+                  br
+                  = f.password_field :current_password, autocomplete: "current-password", type:"password", placeholder:t('devise.old_password'), class:"form-control", id:"cur_pas", onkeyup:"checkParams()",required:false
+                .form-group.mb-30
+                  = f.label :password, t('devise.new_password'), for:"password", class:"control-label input-label"
+                  br
+                  = f.password_field :password, autocomplete: "new-password", type:"password", placeholder:t('devise.new_password'), class:"form-control", id:"pass", onkeyup:"checkParams()",required:false
+                  - if @minimum_password_length
+                    br
+                    em
+                      ="#{@minimum_password_length} #{t('devise.characters_minimum')}"
+                .form-group.mb-40
+                  = f.label :password_confirmation, t('devise.confirm_password'), for:"confirmPassword", class:"control-label input-label"
+                  br
+                  = f.password_field :password_confirmation, autocomplete: "new-password", type:"password", placeholder:t('devise.confirm_password'), class:"form-control", id:"conf_pas", onkeyup:"checkParams()",required:false
+                .general-text-align
+                  = f.submit t('button.save'), class:"btn btn-default mb-35", id:"btn_save", disabled:"disabled"
+        .col-sm-12
+          p.in-gold-500.font-18.mb-25
+            =t('devise.remove_account')
+          div
+            .general-settings-btn
+              = button_to t('devise.remove_my_account'), registration_path(resource_name), data: { confirm: t('devise.are_you_sure') }, method: :delete, id:"btn", disabled:"disabled", class:"btn btn-default mb-20"
+            .form-group.checkbox.general-settings-checkbox
+              label.checkbox-label
+                input#check.checkbox-input[type="checkbox" hidden="true" onclick="check();"]
+                span.checkbox-icon
+                  i.fa.fa-check
+                span.checkbox-text
+                  =t('devise.understand')
